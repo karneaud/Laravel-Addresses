@@ -1,7 +1,7 @@
 {
-    "name": "lecturize/laravel-addresses",
+    "name": "ryanrapini/laravel-addresses",
     "description": "Simple address and contact management for Laravel 5.",
-    "homepage" : "https://github.com/Lecturize/Laravel-Addresses",
+    "homepage" : "https://github.com/ryanrapini/Laravel-Addresses",
     "license": "MIT",
     "keywords": [
         "lecturize",
