@@ -17,23 +17,7 @@ class Address extends Model
     /**
      * @inheritdoc
      */
-    protected $fillable = [
-        'street',
-        'street_extra',
-        'city',
-        'state',
-        'post_code',
-        'country_id',
-        'note',
-        'lat',
-        'lng',
-        'addressable_id',
-        'addressable_type',
-        'is_public',
-        'is_primary',
-        'is_billing',
-        'is_shipping',
-    ];
+    protected $fillable = [];
 
     /**
      * @inheritdoc
@@ -45,9 +29,38 @@ class Address extends Model
      */
     public function __construct(array $attributes = [])
     {
+        $this->setFillable();
+        
         parent::__construct($attributes);
 
         $this->table = config('lecturize.addresses.table', 'addresses');
+    }
+
+    private function setFillable()
+    {
+        $fields =  [
+            'street',
+            'street_extra',
+            'city',
+            'state',
+            'post_code',
+            'country_id',
+            'note',
+            'lat',
+            'lng',
+            'addressable_id',
+            'addressable_type'
+        ];
+
+        $columns = config('lecturize.addresses.columns', array());
+
+        $flags = config('lecturize.addresses.flags', array());
+        $flags = array_map(function($val) { return "is_" . $val;} , $flags);
+
+        $fields = array_merge($fields, $columns, $flags);
+
+        $this->fillable($fields);
+
     }
 
     /**
@@ -81,10 +94,10 @@ class Address extends Model
     public static function getValidationRules()
     {
         $rules = [
-            'street'       => 'required|string|min:3|max:60',
-            'street_extra' => 'nullable|string|min:3|max:60',
-            'city'         => 'required|string|min:3|max:60',
-            'state'        => 'nullable|string|min:3|max:60',
+            'street'       => 'required|string|max:60',
+            'street_extra' => 'nullable|string|max:60',
+            'city'         => 'required|string|max:60',
+            'state'        => 'nullable|string|max:60',
             'post_code'    => 'required|min:4|max:10|AlphaDash',
             'country_id'   => 'required|integer',
         ];

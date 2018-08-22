@@ -15,6 +15,12 @@ return [
          */
         'flags' => ['public', 'primary', 'billing', 'shipping'],
 
+
+        /*
+         * Extra columns to be stored in the table as fillable
+         */
+        'columns' => [],
+
         /*
          * Enable geocoding to add coordinates (lon/lat) to addresses
          */
